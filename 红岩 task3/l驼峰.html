@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字符串转驼峰形式</title>
+</head>
+
+<body>
+    <script>
+        var str = "love you";
+        function stringToCamel(str) {
+            // 用split方法将字符串拆分成数组
+            let temp = str.split("-");
+
+            for (let i = 1; i < temp.length; i++) {
+                temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
+            }
+
+            return temp.join("");
+        }
+        document.write(stringToCamel(str));
+    </script>
+</body>
+
+</html>

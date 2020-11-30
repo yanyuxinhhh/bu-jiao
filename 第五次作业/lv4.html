@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">用户留言</div>
+        <div class="message_box" id="messageBox"></div>
+        <div><input id="myInput" type="text" placeholder="请输入留言类容"><button id="doPost">提交</button></div>
+    </div>
+    <script>
+
+        window.onload = function () {
+
+            var MessageBox = document.getElementById("messageBox");
+            var Input = document.getElementById("myInput");
+            var PostBtn = document.getElementById("doPost");
+
+            PostBtn.onclick = function () {
+                if (Input.value) {
+                    //写入发表留言的时间
+                    var Time = document.createElement("div");
+                    Time.className = "time";
+                    var myDate = new Date();
+                    Time.innerHTML = myDate.toLocaleString();
+                    MessageBox.appendChild(Time);
+
+                    //写入留言内容
+                    var MessageContent = document.createElement("div");
+                    MessageContent.className = "message_content";
+                    MessageContent.innerHTML = Input.value;
+                    Input.value = "";
+                    MessageBox.appendChild(MessageContent);
+                }
+
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

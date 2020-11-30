@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="换色" onclick="changeColor();" />
+    <br>
+    <script type="text/javascript">
+        // 定义可换的颜色
+        var colors = ["pink", "yellow", "gray", "green", "purple"];
+        var index = 0;
+        // 换色方法
+        function changeColor() {
+            var color = colors[index++];
+            document.bgColor = color;
+            if (index == colors.length) {
+                index = 0;
+            }
+        }
+    </script>
+</body>
+
+</html>

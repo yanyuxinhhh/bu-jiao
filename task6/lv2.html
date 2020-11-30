@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        ajax_js
+    </title>
+    <style type="text/css">
+        #getData th {
+            width: 100px;
+        }
+
+        #getData td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div>
+            <button onclick="request()">Request</button>
+        </div>
+        <table id="getData">
+            <tr>
+                <th>
+                    申请人省份
+                </th>
+                <th>
+                    人数
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+
+        function request() {
+            //第一步：创建XMLHttpRequest对象
+            var xmlHttp;
+            if (window.XMLHttpRequest) {            //非IE
+                xmlHttp = new XMLHttpRequest();
+                console.log('创建了XMLHttpRequest对象');
+            } else if (window.ActiveXObject) {       //IE
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                console.log('IE');
+                console.log('创建了ActiveXObject对象');
+            }
+
+            //第二步：设置请求方式
+            var url = "http://hebutgo.com:8080/maps/getMapsList";
+            xmlHttp.open("GET", url, true);
+            console.log('执行了open()');
+
+            //第三步：设置发送请求的内容
+            xmlHttp.send();
+            console.log('调用了send()');
+
+            //第四步：回调函数
+            xmlHttp.onreadystatechange = function () {
+                console.log('执行了回调函数,此时readystate为' + xmlHttp.readyState + ' status为' + xmlHttp.status);
+                if (xmlHttp.readyState == 4) {
+                    if (xmlHttp.status == 200) {
+                        var obj = document.getElementById('getData');
+                        console.log('拿到了返回数据');
+                        console.log(JSON.parse(xmlHttp.responseText));
+                        var res = JSON.parse(xmlHttp.responseText).result;
+                        for (var i = 0; i < res.length; i++) {
+                            var node = document.createElement('tr');
+                            node.innerHTML = '<td>' + res[i]['申请人省份'] + '</td><td>' + res[i]['counts'] + '</td>'
+                            obj.appendChild(node);
+                        }
+                    } else {
+                        alert("AJAX服务器返回错误！");
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
